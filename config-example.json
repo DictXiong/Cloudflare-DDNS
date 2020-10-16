@@ -15,5 +15,11 @@
       ],
       "proxied": false
     }
-  ]
+  ],
+  "get_ip": {
+    "ipv4": "8.8.8.8",
+    "ipv4_prefix": "",
+    "ipv6": "2001::",
+    "ipv6_prefix": ""
+  }
 }
