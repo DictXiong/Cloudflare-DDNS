@@ -6,7 +6,8 @@ To run it, you should
 
 1. `pip install requests`
 2. copy `config-example.json` to `config.json`, then edit it
-3. `python cloudflare-ddns.py`, or `python cloudflare-ddns.py --repeat`
+3. `python cloudflare-ddns.py`, or `python cloudflare-ddns.py --repeat`, or `python cloudflare-ddns.py --dry-run`
+4. run `python cloudflare-ddns.py --help` to get help
 
 ---by Dict Xiong
 
