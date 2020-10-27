@@ -11,7 +11,7 @@ log_level_table = {
     "fatal": logging.FATAL,
 }
 dry_run = False
-PATH = os.getcwd() + "/"
+PATH = sys.path[0] + "/"
 version = float(str(sys.version_info[0]) + "." + str(sys.version_info[1]))
 
 def getIPs_api():
