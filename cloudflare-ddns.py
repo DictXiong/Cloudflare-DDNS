@@ -170,7 +170,14 @@ def cf_api(endpoint, method, config, headers={}, data=False):
 def updateIPs():
     for ip in getIPs_self():
         logging.info(f"Committing record {ip}")
-        commitRecord(ip)
+        while True:
+            try:
+                commitRecord(ip)
+            except Exception as e:
+                logging.error("Error while committing record: " + str(e))
+                logging.error("Retrying...")
+                continue
+            break
 
 def keepAwake():
     ES_SYSTEM_REQUIRED   = 0x00000001
