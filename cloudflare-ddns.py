@@ -150,7 +150,7 @@ def cf_api(endpoint, method, config, headers={}, data=False):
             "X-Auth-Email": config['authentication']['api_key']['account_email'],
             "X-Auth-Key": config['authentication']['api_key']['api_key'],        
         }
-
+    retry_count = 0
     while True:
         try:
             if(data == False):
@@ -161,6 +161,9 @@ def cf_api(endpoint, method, config, headers={}, data=False):
                     method, "https://api.cloudflare.com/client/v4/" + endpoint, headers=headers, json=data, timeout=60)
         except Exception as e:
             logging.error("Unable to access cloudflare API: " + str(e))
+            retry_count += 1
+            if retry_count == 3:
+                break
             logging.error("Retrying...")
             continue
         break
@@ -170,11 +173,15 @@ def cf_api(endpoint, method, config, headers={}, data=False):
 def updateIPs():
     for ip in getIPs_self():
         logging.info(f"Committing record {ip}")
+        retry_count = 0
         while True:
             try:
                 commitRecord(ip)
             except Exception as e:
                 logging.error("Error while committing record: " + str(e))
+                retry_count += 1
+                if retry_count == 3:
+                    break
                 logging.error("Retrying...")
                 continue
             break
